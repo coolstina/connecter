@@ -1,4 +1,4 @@
-package elastic
+package elasticsearch
 
 import (
 	"context"
@@ -22,7 +22,7 @@ type ElasticSuite struct {
 
 func (e *ElasticSuite) BeforeTest(suiteName, testName string) {
 	var err error
-	e.client, err = NewElasticConnection(
+	e.client, err = NewConnection(
 		WithGzip(false),
 		WithHealthCheck(false),
 		WithSniff(false),
