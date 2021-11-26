@@ -1,4 +1,4 @@
-package elastic
+package elasticsearch
 
 import (
 	"reflect"
@@ -12,7 +12,7 @@ const (
 	DefaultURL = "http://127.0.0.1:9200"
 )
 
-func NewElasticConnection(ops ...Option) (*elastic.Client, error) {
+func NewConnection(ops ...Option) (*elastic.Client, error) {
 	opts := &options{}
 	for _, o := range ops {
 		o.apply(opts)
