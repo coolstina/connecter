@@ -1,0 +1,5 @@
+{"_index":"hello_world","_type":"doc","_id":"1","_score":1,"_source":{"name":"China", "location": "41.12,-71.34"}}
+{"_index":"hello_world","_type":"doc","_id":"2","_score":1,"_source":{"name":"USA", "location": "42.12,-72.34"}}
+{"_index":"hello_world","_type":"doc","_id":"3","_score":1,"_source":{"name":"Russia", "location": "43.12,-73.34"}}
+{"_index":"hello_world","_type":"doc","_id":"4","_score":1,"_source":{"name":"France", "location": "44.12,-74.34"}}
+{"_index":"hello_world","_type":"doc","_id":"5","_score":1,"_source":{"name":"Germany", "location": "45.12,-75.34"}}
