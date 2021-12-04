@@ -59,38 +59,40 @@ func options(configure *Config) *redis.Options {
 	cv := reflect.ValueOf(configure).Elem()
 
 	for i := 0; i < cv.NumField(); i++ {
-		if cv.Field(i).IsValid() {
-			switch ct.Field(i).Name {
-			case "Host":
-				value := ov.FieldByName("Addr")
-				if value.IsValid() && value.CanSet() {
-					if value.Kind() == reflect.String {
-						value.SetString(cv.Field(i).String())
-					}
+		if !cv.Field(i).IsValid() {
+			continue
+		}
+		switch ct.Field(i).Name {
+		case "Host":
+			value := ov.FieldByName("Addr")
+			if value.IsValid() && value.CanSet() {
+				if value.Kind() == reflect.String {
+					value.SetString(cv.Field(i).String())
 				}
-			case "Database":
-				value := ov.FieldByName("DB")
-				if value.IsValid() && value.CanSet() {
-					if value.Kind() == reflect.Int {
-						value.SetInt(cv.Field(i).Int())
-					}
+			}
+		case "Database":
+			value := ov.FieldByName("DB")
+			if value.IsValid() && value.CanSet() {
+				if value.Kind() == reflect.Int {
+					value.SetInt(cv.Field(i).Int())
 				}
-			default:
-				if !cv.Field(i).IsZero() {
-					field := ov.FieldByName(ct.Field(i).Name)
-					if field.IsValid() && field.CanSet() {
-						if field.Kind() == reflect.String {
-							field.SetString(cv.Field(i).String())
-						}
+			}
+		default:
+			if cv.Field(i).IsZero() {
+				continue
+			}
+			field := ov.FieldByName(ct.Field(i).Name)
+			if field.IsValid() && field.CanSet() {
+				if field.Kind() == reflect.String {
+					field.SetString(cv.Field(i).String())
+				}
 
-						if field.Kind() == reflect.Int64 {
-							field.SetInt(cv.Field(i).Int())
-						}
+				if field.Kind() == reflect.Int64 {
+					field.SetInt(cv.Field(i).Int())
+				}
 
-						if field.Kind() == reflect.Int {
-							field.SetInt(cv.Field(i).Int())
-						}
-					}
+				if field.Kind() == reflect.Int {
+					field.SetInt(cv.Field(i).Int())
 				}
 			}
 		}
