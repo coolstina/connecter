@@ -90,6 +90,7 @@ func options(configure *Config) *redis.Options {
 					field.SetString(cv.Field(i).String())
 				}
 
+
 				if field.Kind() == reflect.Int64 {
 					field.SetInt(cv.Field(i).Int())
 				}
