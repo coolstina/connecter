@@ -62,6 +62,7 @@ func options(configure *Config) *redis.Options {
 		if !cv.Field(i).IsValid() {
 			continue
 		}
+
 		switch ct.Field(i).Name {
 		case "Host":
 			value := ov.FieldByName("Addr")
@@ -81,11 +82,14 @@ func options(configure *Config) *redis.Options {
 			if cv.Field(i).IsZero() {
 				continue
 			}
+
 			field := ov.FieldByName(ct.Field(i).Name)
+
 			if field.IsValid() && field.CanSet() {
 				if field.Kind() == reflect.String {
 					field.SetString(cv.Field(i).String())
 				}
+
 
 				if field.Kind() == reflect.Int64 {
 					field.SetInt(cv.Field(i).Int())
