@@ -12,15 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package connecter
+package redis
 
-type DriverName string
+import (
+	"testing"
+	"time"
 
-func (d DriverName) String() string {
-	return string(d)
-}
-
-const (
-	DriverNameOfMySQL  DriverName = "mysql"
-	DriverNameOfSQLite DriverName = "sqlite"
+	"github.com/stretchr/testify/assert"
 )
+
+func TestNewConnection(t *testing.T) {
+	connection, err := NewConnection(
+		NewDefaultSimpleConfig("localhost:6379", "", 8),
+		WithMaxRetries(3),
+	)
+	assert.NoError(t, err)
+	assert.NotNil(t, connection)
+
+	// Set key value.
+	set := connection.Set("username", "helloshaohua", time.Second*5)
+	assert.NotNil(t, set)
+	actual, err := set.Result()
+	assert.NoError(t, err)
+	assert.Equal(t, "OK", actual)
+
+	// Get key value.
+	actual, err = connection.Get("username").Result()
+	assert.NoError(t, err)
+	assert.Equal(t, "helloshaohua", actual)
+}

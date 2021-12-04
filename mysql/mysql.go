@@ -1,4 +1,4 @@
-// Copyright 2021 helloshaohua &lt;wu.shaohua@foxmail.com&gt;
+// Copyright 2021 helloshaohua <wu.shaohua@foxmail.com>;
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
