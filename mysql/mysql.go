@@ -112,7 +112,7 @@ func CreateDatabaseIfNotExists(driverName, dataSourceName, databaseName string, 
 	}
 	defer db.Close()
 
-	s := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s DEFAULT CHARACTER SET %s", databaseName, options.charset)
+	s := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS `%s` DEFAULT CHARACTER SET %s", databaseName, options.charset)
 	if _, err = db.Exec(s); err != nil {
 		return err
 	}
